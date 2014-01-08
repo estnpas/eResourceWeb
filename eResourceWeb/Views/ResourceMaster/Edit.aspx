@@ -15,7 +15,7 @@
         <fieldset>
             <legend>ResourceMaster</legend>
     
-            <%: Html.HiddenFor(model => model.ResourceMasterId) %>
+            <%: Html.HiddenFor(model => model.ResourceId) %>
     
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.ResourceName) %>

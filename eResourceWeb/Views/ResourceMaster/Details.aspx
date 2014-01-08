@@ -20,7 +20,7 @@
     </fieldset>
     <p>
     
-        <%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceMasterId }) %> |
+        <%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |
         <%: Html.ActionLink("Back to List", "Index") %>
     </p>
 </body>

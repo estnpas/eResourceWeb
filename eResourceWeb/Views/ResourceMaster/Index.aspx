@@ -25,9 +25,9 @@
                 <%: Html.DisplayFor(modelItem => item.ResourceName) %>
             </td>
             <td>
-                <%: Html.ActionLink("Edit", "Edit", new { id=item.ResourceMasterId }) %> |
-                <%: Html.ActionLink("Details", "Details", new { id=item.ResourceMasterId }) %> |
-                <%: Html.ActionLink("Delete", "Delete", new { id=item.ResourceMasterId }) %>
+                <%: Html.ActionLink("Edit", "Edit", new { id=item.ResourceId }) %> |
+                <%: Html.ActionLink("Details", "Details", new { id=item.ResourceId }) %> |
+                <%: Html.ActionLink("Delete", "Delete", new { id=item.ResourceId }) %>
             </td>
         </tr>
     <% } %>
