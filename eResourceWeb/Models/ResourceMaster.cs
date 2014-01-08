@@ -9,7 +9,7 @@ namespace eResourceWeb.Models
     public class ResourceMaster : BaseModel
     {
         [Key]
-        public int ResourceId { get; set; }
+        public float ResourceId { get; set; }
         public string ResourceName { get; set; }
         public int TypeId { get; set; }
         public int ManagerId { get; set; }
@@ -27,8 +27,6 @@ namespace eResourceWeb.Models
         public int TimeSheetApproval { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdateDate { get; set; }
-
-        public virtual ICollection<ResourceMaster> Resources { get; set; }
        
     }
 }

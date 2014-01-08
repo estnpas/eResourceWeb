@@ -6,13 +6,13 @@ namespace eResourceWeb.DAL
 {
     public class ResourceWebContext : DbContext
     {
-        public DbSet<ResourceMaster> ResourceMaster { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        
+        public ResourceWebContext()
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            Database.SetInitializer<ResourceWebContext>(null);
         }
 
+        public DbSet<ResourceMaster> ResourceMaster { get; set; }
         public DbSet<ResourceMasterAttributesModel> ResourceMasterAttributesModels { get; set; }
     }
 }
