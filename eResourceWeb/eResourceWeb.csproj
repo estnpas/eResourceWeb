@@ -140,14 +140,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\ResourceMaster.cs">
+      <DependentUpon>ResourceMaster.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResourceMasterAttributesController.cs" />
+    <Compile Include="Controllers\ResourceMasterController.cs" />
+    <Compile Include="DAL\ResourceWebContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ResourceMaster.cs" />
+    <Compile Include="Models\ResourceMasterAttributesModel.cs" />
+    <Compile Include="Models\ResourceTypeAttributeModel.cs" />
+    <Compile Include="Models\ResourceTypeAttributeValueModel.cs" />
+    <Compile Include="Models\ResourceTypeMasterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -158,6 +171,11 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\ResourceMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceMaster.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +254,17 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\ResourceMasterAttributes\Create.aspx" />
+    <Content Include="Views\ResourceMasterAttributes\Delete.aspx" />
+    <Content Include="Views\ResourceMasterAttributes\Details.aspx" />
+    <Content Include="Views\ResourceMasterAttributes\Edit.aspx" />
+    <Content Include="Views\ResourceMasterAttributes\Index.aspx" />
+    <Content Include="Views\ResourceMaster\Create.aspx" />
+    <Content Include="Views\ResourceMaster\Delete.aspx" />
+    <Content Include="Views\ResourceMaster\Details.aspx" />
+    <Content Include="Views\ResourceMaster\Edit.aspx" />
+    <Content Include="Views\ResourceMaster\Index.aspx" />
+    <Content Include="Views\ResourceMaster\ResourceMaster.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -266,16 +295,27 @@
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
     <None Include="readme.txt" />
+    <Content Include="App_Data\ResourceMaster.xsc">
+      <DependentUpon>ResourceMaster.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\ResourceMaster.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ResourceMaster.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\ResourceMaster.xss">
+      <DependentUpon>ResourceMaster.xsd</DependentUpon>
+    </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
