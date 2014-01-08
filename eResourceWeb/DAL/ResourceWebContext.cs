@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace eResourceWeb.DAL
 {
-    public class eResourceWebContext : DbContext
+    public class ResourceWebContext : DbContext
     {
         public DbSet<ResourceMaster> ResourceMaster { get; set; }
 

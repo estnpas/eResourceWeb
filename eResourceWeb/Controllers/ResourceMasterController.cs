@@ -1,30 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eResourceWeb.Models;
 using eResourceWeb.DAL;
 
 namespace eResourceWeb.Controllers
 {
-    private eResourceWebContext db = new eResourceWebContext();
-
     public class ResourceMasterController : Controller
     {
+        private ResourceWebContext db = new ResourceWebContext();
+
         //
         // GET: /ResourceMaster/
 
         public ActionResult Index()
         {
-            return View();
+            return View(db.ResourceMaster.ToList());
         }
 
         //
         // GET: /ResourceMaster/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 0)
         {
-            return View();
+            ResourceMaster resourcemaster = db.ResourceMaster.Find(id);
+            if (resourcemaster == null)
+            {
+                return HttpNotFound();
+            }
+            return View(resourcemaster);
         }
 
         //
@@ -39,77 +47,78 @@ namespace eResourceWeb.Controllers
         // POST: /ResourceMaster/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ResourceMaster resourcemaster)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.ResourceMaster.Add(resourcemaster);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(resourcemaster);
         }
 
         //
         // GET: /ResourceMaster/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
-            return View();
+            ResourceMaster resourcemaster = db.ResourceMaster.Find(id);
+            if (resourcemaster == null)
+            {
+                return HttpNotFound();
+            }
+            return View(resourcemaster);
         }
 
         //
         // POST: /ResourceMaster/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ResourceMaster resourcemaster)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(resourcemaster).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(resourcemaster);
         }
 
         //
         // GET: /ResourceMaster/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id = 0)
         {
-            return View();
+            ResourceMaster resourcemaster = db.ResourceMaster.Find(id);
+            if (resourcemaster == null)
+            {
+                return HttpNotFound();
+            }
+            return View(resourcemaster);
         }
 
         //
         // POST: /ResourceMaster/Delete/5
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ResourceMaster resourcemaster = db.ResourceMaster.Find(id);
+            db.ResourceMaster.Remove(resourcemaster);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        public ActionResult ResourceMaster()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Resource Master test page.";
-
-            return View();
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

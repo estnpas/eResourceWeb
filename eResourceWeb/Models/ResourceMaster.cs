@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eResourceWeb.Models
 {
 
-    /// <summary>
-    /// Summary description for ResourceMaster
-    /// </summary>
     public class ResourceMaster
     {
- 
-        public float ResourceId { get; set; }
+        [Key]
+        public int ResourceId { get; set; }
         public string ResourceName { get; set; }
 
         public virtual ICollection<ResourceMaster> Resources { get; set; }
