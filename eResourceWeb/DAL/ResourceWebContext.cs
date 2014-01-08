@@ -12,5 +12,7 @@ namespace eResourceWeb.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public DbSet<ResourceMasterAttributesModel> ResourceMasterAttributesModels { get; set; }
     }
 }
