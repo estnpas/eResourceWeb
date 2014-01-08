@@ -104,5 +104,12 @@ namespace eResourceWeb.Controllers
                 return View();
             }
         }
+
+        public ActionResult ResourceMaster()
+        {
+            ViewBag.Message = "Resource Master test page.";
+
+            return View();
+        }
     }
 }
