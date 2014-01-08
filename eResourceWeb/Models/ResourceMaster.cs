@@ -9,9 +9,11 @@ namespace eResourceWeb.Models
     /// </summary>
     public class ResourceMaster
     {
-        
+ 
         public float ResourceId { get; set; }
         public string ResourceName { get; set; }
+
+        public virtual ICollection<ResourceMaster> Resources { get; set; }
        
     }
 }

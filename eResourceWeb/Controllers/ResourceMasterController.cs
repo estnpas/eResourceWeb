@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eResourceWeb.DAL;
 
 namespace eResourceWeb.Controllers
 {
+    private eResourceWebContext db = new eResourceWebContext();
+
     public class ResourceMasterController : Controller
     {
         //
