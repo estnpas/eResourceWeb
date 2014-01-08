@@ -140,10 +140,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\ResourceMaster.cs">
-      <DependentUpon>ResourceMaster.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -171,11 +167,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="App_Data\ResourceMaster.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ResourceMaster.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -295,19 +286,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
     <None Include="readme.txt" />
-    <Content Include="App_Data\ResourceMaster.xsc">
-      <DependentUpon>ResourceMaster.xsd</DependentUpon>
-    </Content>
-    <None Include="App_Data\ResourceMaster.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ResourceMaster.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="App_Data\ResourceMaster.xss">
-      <DependentUpon>ResourceMaster.xsd</DependentUpon>
-    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
