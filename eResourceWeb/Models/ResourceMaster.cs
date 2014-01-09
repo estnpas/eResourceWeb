@@ -9,6 +9,7 @@ namespace eResourceWeb.Models
     public class ResourceMaster : BaseModel
     {
         [Key]
+
         public Double ResourceId { get; set; }
         public string ResourceName { get; set; }
         public Double TypeId { get; set; }
@@ -22,7 +23,7 @@ namespace eResourceWeb.Models
         public string Email { get; set; }
         public string Notes { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime TerminationDate { get; set; }
+        public DateTime? TerminationDate { get; set; }
         public string Phone { get; set; }
         public Double TimeSheetApproval { get; set; }
         public string UpdatedBy { get; set; }
