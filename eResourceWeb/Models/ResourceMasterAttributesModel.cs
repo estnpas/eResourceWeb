@@ -13,10 +13,10 @@ namespace eResourceWeb.Models
     {
 
         [Key]
-        public int Id { get; set; }
-        public int ResourceId { get; set; }
-        public int AttributeId { get; set; }
-        public int AttributeValueId { get; set; }
+        public Double Id { get; set; }
+        public Double ResourceId { get; set; }
+        public Double AttributeId { get; set; }
+        public Double AttributeValueId { get; set; }
 
     }
 }

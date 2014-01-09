@@ -12,8 +12,8 @@ namespace eResourceWeb.Models
     {
 
         [Key]
-        public int Id { get; set; }
-        public int ResourceTypeId { get; set; }
+        public Double Id { get; set; }
+        public Double ResourceTypeId { get; set; }
         public string Name { get; set; }
 
     }
