@@ -9,7 +9,6 @@ namespace eResourceWeb.Models
     public class ResourceMaster : BaseModel
     {
         [Key]
-
         public Double ResourceId { get; set; }
         public string ResourceName { get; set; }
         public Double TypeId { get; set; }
