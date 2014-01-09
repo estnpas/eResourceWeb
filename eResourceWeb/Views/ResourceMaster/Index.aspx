@@ -21,14 +21,11 @@
     
     <% foreach (var item in Model) { %>
         <tr>
-            <td>
-                <%: Html.DisplayFor(modelItem => item.ResourceName) %>
+           <td>
+               <%: Html.ActionLink(item.ResourceName, "Details", new { id=item.ResourceId }) %>
             </td>
-            <td>
-                <%: Html.ActionLink("Edit", "Edit", new { id=item.ResourceId }) %> |
-                <%: Html.ActionLink("Details", "Details", new { id=item.ResourceId }) %> |
-                <%: Html.ActionLink("Delete", "Delete", new { id=item.ResourceId }) %>
-            </td>
+
+             
         </tr>
     <% } %>
     

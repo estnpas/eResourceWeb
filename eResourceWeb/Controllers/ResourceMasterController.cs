@@ -20,7 +20,12 @@ namespace eResourceWeb.Controllers
         public ActionResult Index()
         {
             db.Database.Log = Console.Write;
-            return View(db.ResourceMaster.ToList<ResourceMaster>());
+            var resources = from s in db.ResourceMaster 
+                            select s;
+            resources = resources.OrderBy(s => s.ResourceName);
+
+            //return View(db.ResourceMaster.ToList<ResourceMaster>());
+            return View(resources.ToList<ResourceMaster>());
         }
 
         //
