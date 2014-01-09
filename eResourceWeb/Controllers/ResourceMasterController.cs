@@ -19,7 +19,8 @@ namespace eResourceWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(db.ResourceMaster.ToList());
+            db.Database.Log = Console.Write;
+            return View(db.ResourceMaster.ToList<ResourceMaster>());
         }
 
         //

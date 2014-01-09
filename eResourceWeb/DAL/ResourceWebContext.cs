@@ -13,6 +13,6 @@ namespace eResourceWeb.DAL
         }
 
         public DbSet<ResourceMaster> ResourceMaster { get; set; }
-        public DbSet<ResourceMasterAttributesModel> ResourceMasterAttributesModels { get; set; }
+        public DbSet<ResourceMasterAttributesModel> ResourceMasterAttributesModel { get; set; }
     }
 }

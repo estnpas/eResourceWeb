@@ -19,7 +19,7 @@ namespace eResourceWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(db.ResourceMasterAttributesModels.ToList());
+            return View(db.ResourceMasterAttributesModel.ToList());
         }
 
         //
@@ -27,7 +27,7 @@ namespace eResourceWeb.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModels.Find(id);
+            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModel.Find(id);
             if (resourcemasterattributesmodel == null)
             {
                 return HttpNotFound();
@@ -52,7 +52,7 @@ namespace eResourceWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ResourceMasterAttributesModels.Add(resourcemasterattributesmodel);
+                db.ResourceMasterAttributesModel.Add(resourcemasterattributesmodel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace eResourceWeb.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModels.Find(id);
+            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModel.Find(id);
             if (resourcemasterattributesmodel == null)
             {
                 return HttpNotFound();
@@ -94,7 +94,7 @@ namespace eResourceWeb.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModels.Find(id);
+            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModel.Find(id);
             if (resourcemasterattributesmodel == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace eResourceWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModels.Find(id);
-            db.ResourceMasterAttributesModels.Remove(resourcemasterattributesmodel);
+            ResourceMasterAttributesModel resourcemasterattributesmodel = db.ResourceMasterAttributesModel.Find(id);
+            db.ResourceMasterAttributesModel.Remove(resourcemasterattributesmodel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
