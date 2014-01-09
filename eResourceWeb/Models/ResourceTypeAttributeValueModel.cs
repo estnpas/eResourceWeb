@@ -12,8 +12,8 @@ namespace eResourceWeb.Models
     {
 
         [Key]
-        public Double AttributeValueId { get; set; }
-        public Double AttributeId { get; set; }
+        public int AttributeValueId { get; set; }
+        public int AttributeId { get; set; }
         public string AttributeValue { get; set; }
 
     }
