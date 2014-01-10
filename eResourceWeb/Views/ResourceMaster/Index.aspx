@@ -8,7 +8,17 @@
     <title>Index</title>
 </head>
 <body>
+<% using(Html.BeginForm()) %>
+<% { %>
     <p>
+        Find by name: <%: Html.TextBox("SearchString") %>
+        <input type="submit" value="Search" /></p>
+
+
+    <p>
+<% } %>
+
+
         <%: Html.ActionLink("Create New", "Create") %>
     </p>
     <table>
