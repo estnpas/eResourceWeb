@@ -11,6 +11,8 @@ namespace eResourceWeb.Models
     {
         [Key]
         public int ResourceId { get; set; }
+
+        [Display(Name = "Name")]
         public string ResourceName { get; set; }
         public int TypeId { get; set; }
         public int ManagerId { get; set; }
@@ -20,7 +22,10 @@ namespace eResourceWeb.Models
         public int OfficeId { get; set; }
         public int DepartmentId { get; set; }
         public int TeamId { get; set; }
+        
+        [Display(Name = "Email")]
         public string Email { get; set; }
+
         public string Notes { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? TerminationDate { get; set; }
@@ -30,6 +35,8 @@ namespace eResourceWeb.Models
         public DateTime UpdateDate { get; set; }
 
         public List<ResourceSkillDTO> skillsList;
+
+        [Display(Name = "Manager")]
         public string ManagerName;
        
     }
