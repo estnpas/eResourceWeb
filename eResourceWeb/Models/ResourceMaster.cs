@@ -23,7 +23,7 @@ namespace eResourceWeb.Models
         public string Email { get; set; }
         public string Notes { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime TerminationDate { get; set; }
+        public DateTime? TerminationDate { get; set; }
         public string Phone { get; set; }
         public int TimeSheetApproval { get; set; }
         public string UpdatedBy { get; set; }
