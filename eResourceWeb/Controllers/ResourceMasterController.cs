@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using eResourceWeb.Models;
 using eResourceWeb.DAL;
+using eResourceWeb.DTO;
 
 namespace eResourceWeb.Controllers
 {
@@ -38,6 +39,26 @@ namespace eResourceWeb.Controllers
             {
                 return HttpNotFound();
             }
+
+            //  We need to retrieve any associate Skill Inventory information
+            string sqlQuery = "select "
+                                    + "RTA.Id AS SkillGroupId, "
+                                    + "RTA.Name AS SkillGroupName, "
+                                    + "RTAV.AttributeValueId AS SkillId, "
+                                    + "RTAV.AttributeValue AS SkillName "
+                                + "FROM dbo.ResourceMaster RM "
+                                + "JOIN dbo.ResourceMasterAttributes RMA "
+                                + "ON RMA.ResourceId = RM.ResourceId "
+                                + "JOIN dbo.ResourceTypeAttribute RTA "
+                                + "ON RM.TypeId = RTA.ResourceTypeId "
+                                + "JOIN dbo.ResourceTypeAttributeValue RTAV "
+                                + "ON RMA.Id = RTAV.AttributeValueId "
+                                + "AND RMA.AttributeId = RTAV.AttributeId "
+                                + "WHERE RM.ResourceId = @p0";
+            
+            var resourceSkills = db.Database.SqlQuery<ResourceSkillDTO>(sqlQuery, id).ToList();
+            resourcemaster.skillsList = resourceSkills;
+
             return View(resourcemaster);
         }
 

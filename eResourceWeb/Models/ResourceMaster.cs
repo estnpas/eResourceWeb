@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eResourceWeb.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,6 +28,8 @@ namespace eResourceWeb.Models
         public int TimeSheetApproval { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdateDate { get; set; }
+
+        public List<ResourceSkillDTO> skillsList;
        
     }
 }
