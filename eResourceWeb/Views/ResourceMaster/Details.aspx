@@ -6,6 +6,12 @@
 <head runat="server">
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
+
+    <link href="<%= ResolveUrl ("~/Content/site.css") %>" rel="stylesheet" type="text/css" />      
+    <script src="<%= ResolveUrl ("~/Scripts/jquery-1.8.2.min.js") %>"></script>
+    <script src="<%= ResolveUrl ("~/Scripts/jquery-ui-1.8.24.min.js") %>" type="text/javascript"></script>
+
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js") %>"></script>
 </head>
 <body>
     <style>
@@ -37,26 +43,34 @@
         </div>
     </fieldset>
     <div>
-        <table style="width: 800px; table-layout: fixed;">
-            <col width="300px"/>
-            <col width="500px"/>
-            <tr>
-                <th>Group</th>
-                <th>Skill</th>
-            </tr>
-            <% foreach (var skill in Model.skillsList) { %>
+        <table id="skillTable">
+            <thead>
                 <tr>
-                   <td align="center">
-                       <%: skill.SkillGroupName %>
-                    </td>
-                    <td align="center">
-                        <%: skill.SkillName %>
-                    </td>
+                    <th>Skill-Group</th>
+                    <th>Skill</th>
                 </tr>
-            <% } %>
+            </thead>
+            <tbody>
+                <% foreach (var skill in Model.skillsList) { %>
+                    <tr data-tt-id="1" class="odd gradeX">
+                       <td class="center">
+                           <%: skill.SkillGroupName %>
+                        </td>
+                        <td class="center">
+                            <%: skill.SkillName %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
         </table>
         <%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |
         <%: Html.ActionLink("Back to List", "Index") %>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#skillTable").dataTable();
+        });
+    </script>
 </body>
 </html>
