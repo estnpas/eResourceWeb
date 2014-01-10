@@ -70,8 +70,8 @@ namespace eResourceWeb.Controllers
                                     + "Name AS Name, "
                                     + "ManagerType AS ManagerType "
                                 + "FROM dbo.ManagerMaster "
-                                + "WHERE Id = @p0 "
-                                + "AND ManagerType = 'Resource'";
+                                + "WHERE Id = @p0 ";
+                                //+ "AND ManagerType = 'Resource'";
 
             var manager = db.Database.SqlQuery<ManagerMasterDTO>(managerNameSQLQuery, resourcemaster.ManagerId).Single();
             resourcemaster.ManagerName = manager.Name;
