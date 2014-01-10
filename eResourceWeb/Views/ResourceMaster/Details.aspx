@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
 
-    <link href="<%= ResolveUrl ("~/Content/site.css") %>" rel="stylesheet" type="text/css" />      
+    <link href="<%= ResolveUrl ("~/Content/site.css") %>" rel="stylesheet" type="text/css" /> 
+    <link href="<%= ResolveUrl ("~/Content/themes/smoothness/jquery-ui.css") %>" rel="stylesheet" type="text/css">    
     <script src="<%= ResolveUrl ("~/Scripts/jquery-1.8.2.min.js") %>"></script>
     <script src="<%= ResolveUrl ("~/Scripts/jquery-ui-1.8.24.min.js") %>" type="text/javascript"></script>
 
@@ -16,8 +17,20 @@
     <link href="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/stylesheets/jquery.treetable.theme.default.css") %>" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/javascripts/src/jquery.treetable.js") %>"></script>
 
-    <!--<link href="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css") %>" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js") %>"></script>-->
+    <script type="text/javascript">
+        /**
+         *  deleteSkill
+         *  Remove the skill assignment for the resource and remove from the tree listing
+         *
+         *  @param resourceId
+         *  @param skillGroupId
+         *  @param skillId
+         */
+        function deleteSkill(resourceId, skillGroupId,  skillId) {
+            //alert("Delete " + resourceId + ":" + skillId);
+            $("#skillTable").treetable("removeNode",skillGroupId + "-" + skillId);
+        };
+    </script>
 </head>
 <body>
     <fieldset>
@@ -38,29 +51,32 @@
         </div>
     </fieldset>
     <div>
-        <table cellpadding="0" cellspacing="0" border="0" class="display" id="skillTable" width="30%" align="left">
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="skillTable" align="left">
             <thead>
                 <tr>
                     <th>Skill-List</th>
                 </tr>
             </thead>
             <tbody>
+                <col width="25px" />
+                <col width="20px" />
                 <tr data-tt-id="1">
                     <td>Functional Skills</td>
+                    <td></td>
                 </tr>
                 <% foreach (var skill in Model.skillsList.Where(x => x.SkillGroupName == "Functional Skills")) { %>
                     <tr data-tt-id="<%: skill.SkillGroupId %>-<%: skill.SkillId %>" data-tt-parent-id="<%: skill.SkillGroupId %>">
-                    <!--<tr data-tt-id="1" class="odd gradeX">
-                       <td class="center">
-                           <%: skill.SkillGroupName %>
-                        </td>-->
                         <td class="center">
                             <%: skill.SkillName %>
+                        </td>
+                        <td>
+                            <button id="button-<%: skill.SkillGroupId %>-<%: skill.SkillId %>" onclick="deleteSkill(<%: Model.ResourceId %>,<%: skill.SkillGroupId %>,<%: skill.SkillId %>);">Delete</button>
                         </td>
                     </tr>
                 <% } %>
                 <tr data-tt-id="2">
                     <td>Technical Skills</td>
+                    <td></td>
                 </tr>
                 <% foreach (var skill in Model.skillsList.Where(x => x.SkillGroupName == "Technical Skills")) { %>
                     <tr data-tt-id="<%: skill.SkillGroupId %>-<%: skill.SkillId %>" data-tt-parent-id="<%: skill.SkillGroupId %>">
@@ -73,24 +89,28 @@
         </table>
     </div>
 
+    <table>
+        <tr>
+            <td><%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |</td>
+            <td><%: Html.ActionLink("Back to List", "Index") %></td>
+        </tr>
+    </table>
     
-        <table>
-            <tr>
-                <td><%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |</td>
-                <td><%: Html.ActionLink("Back to List", "Index") %></td>
-            </tr>
-        </table>
-    
-
-    <script>   
+    <script  language="javascript" type="text/javascript">   
         $("#skillTable").treetable({
                         expandable: true
         });
-        /*$(document).ready(function () {
-            $("#skillTable").dataTable({
-                "bJQueryUI": true
-            });
-        });*/
+        $("#skillTable tbody").on("mousedown", "tr", function () {
+            $(".selected").not(this).removeClass("selected");
+            $(this).toggleClass("selected");
+        });
+
+        /*$("button").button({
+            icons: {
+                primary: "ui-icon-circle-close"
+            },
+            text: false
+        }); */
     </script>
 </body>
 </html>
