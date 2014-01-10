@@ -30,6 +30,7 @@ namespace eResourceWeb.Models
         public DateTime UpdateDate { get; set; }
 
         public List<ResourceSkillDTO> skillsList;
+        public string ManagerName;
        
     }
 }

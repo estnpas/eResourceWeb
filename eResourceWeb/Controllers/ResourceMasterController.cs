@@ -64,6 +64,19 @@ namespace eResourceWeb.Controllers
             var resourceSkills = db.Database.SqlQuery<ResourceSkillDTO>(sqlQuery, id).ToList();
             resourcemaster.skillsList = resourceSkills;
 
+            //  We need to retrieve manager's name
+            string managerNameSQLQuery = "select "
+                                      + "Id AS Id, "
+                                    + "Name AS Name, "
+                                    + "ManagerType AS ManagerType "
+                                + "FROM dbo.ManagerMaster "
+                                + "WHERE Id = @p0 "
+                                + "AND ManagerType = 'Resource'";
+
+            var manager = db.Database.SqlQuery<ManagerMasterDTO>(managerNameSQLQuery, resourcemaster.ManagerId).Single();
+            resourcemaster.ManagerName = manager.Name;
+
+
             return View(resourcemaster);
         }
 

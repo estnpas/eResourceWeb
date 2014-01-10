@@ -9,13 +9,20 @@
 </head>
 <body>
     <fieldset>
-        <legend>ResourceMaster</legend>
+        <legend>Resource</legend>
     
         <div class="display-label">
             <%: Html.DisplayNameFor(model => model.ResourceName) %>
         </div>
         <div class="display-field">
             <%: Html.DisplayFor(model => model.ResourceName) %>
+        </div>
+
+        <div class="display-label">
+            <%: Html.DisplayNameFor(model => model.ManagerId) %>
+        </div>
+        <div class="display-field">
+            <%: Html.DisplayFor(model => model.ManagerName) %>
         </div>
     </fieldset>
     <p>
