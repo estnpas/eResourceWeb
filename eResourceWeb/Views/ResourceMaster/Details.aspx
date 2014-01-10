@@ -11,20 +11,14 @@
     <script src="<%= ResolveUrl ("~/Scripts/jquery-1.8.2.min.js") %>"></script>
     <script src="<%= ResolveUrl ("~/Scripts/jquery-ui-1.8.24.min.js") %>" type="text/javascript"></script>
 
-    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js") %>"></script>
+    <link href="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/stylesheets/screen.css") %>" rel="stylesheet" media="screen" />
+    <link href="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/stylesheets/jquery.treetable.css") %>" rel="stylesheet" type="text/css" />   
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/javascripts/src/jquery.treetable.js") %>"></script>
+
+    <!--<link href="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/css/jquery.dataTables_themeroller.css") %>" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js") %>"></script>-->
 </head>
 <body>
-    <style>
-         .right {
-          text-align: right;
-          margin-right: 1em;
-        }
-
-        .left {
-          text-align: left;
-          margin-left: 1em;
-        }
-    </style>
     <fieldset>
         <legend>Resource</legend>
     
@@ -43,19 +37,32 @@
         </div>
     </fieldset>
     <div>
-        <table id="skillTable">
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="skillTable" width="20%" align="left">
             <thead>
                 <tr>
-                    <th>Skill-Group</th>
-                    <th>Skill</th>
+                    <th>Skill-List</th>
                 </tr>
             </thead>
             <tbody>
-                <% foreach (var skill in Model.skillsList) { %>
-                    <tr data-tt-id="1" class="odd gradeX">
+                <tr data-tt-id="0">
+                    <td>Functional Skills</td>
+                </tr>
+                <% foreach (var skill in Model.skillsList.Where(x => x.SkillGroupName == "Functional Skills")) { %>
+                    <tr data-tt-id="<%: skill.SkillId %>" data-tt-parent-id="<%: skill.SkillGroupId %>">
+                    <!--<tr data-tt-id="1" class="odd gradeX">
                        <td class="center">
                            <%: skill.SkillGroupName %>
+                        </td>-->
+                        <td class="center">
+                            <%: skill.SkillName %>
                         </td>
+                    </tr>
+                <% } %>
+                <tr data-tt-id="1">
+                    <td>Technical Skills</td>
+                </tr>
+                <% foreach (var skill in Model.skillsList.Where(x => x.SkillGroupName == "Technical Skills")) { %>
+                    <tr data-tt-id="<%: skill.SkillId %>" data-tt-parent-id="<%: skill.SkillGroupId %>">
                         <td class="center">
                             <%: skill.SkillName %>
                         </td>
@@ -63,14 +70,27 @@
                 <% } %>
             </tbody>
         </table>
-        <%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |
-        <%: Html.ActionLink("Back to List", "Index") %>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $("#skillTable").dataTable();
+    
+        <table>
+            <tr>
+                <td><%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |</td>
+                <td><%: Html.ActionLink("Back to List", "Index") %></td>
+            </tr>
+        </table>
+    
+
+    <script>   
+        $("#skillTable").treetable({
+                        expandable: true
         });
+        $("#skillTable").treetable("collapseAll");
+        /*$(document).ready(function () {
+            $("#skillTable").dataTable({
+                "bJQueryUI": true
+            });
+        });*/
     </script>
 </body>
 </html>
