@@ -33,23 +33,28 @@
     </script>
 </head>
 <body>
-    <fieldset>
-        <legend>Resource</legend>
-    
-        <div class="display-label">
-            <%: Html.DisplayNameFor(model => model.ResourceName) %>
-        </div>
-        <div class="display-field">
-            <%: Html.DisplayFor(model => model.ResourceName) %>
-        </div>
+ 
 
-        <div class="display-label">
-            <%: Html.DisplayNameFor(model => model.ManagerId) %>
-        </div>
-        <div class="display-field">
-            <%: Html.DisplayFor(model => model.ManagerName) %>
-        </div>
-    </fieldset>
+<div>
+    <table>
+        <tr>
+            <td class="display-label">
+                <%: Html.DisplayNameFor(model => model.ResourceName) %>
+            </td> 
+            <td class="display-field">
+                 <%: Html.DisplayFor(model => model.ResourceName) %>      
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                <%: Html.DisplayNameFor(model => model.ManagerId) %>
+            </td> 
+            <td class="display-field">
+                 <%: Html.DisplayFor(model => model.ManagerName) %>    
+            </td>
+        </tr>
+    </table>
+</div>
     <div>
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="skillTable" align="left">
             <thead>
