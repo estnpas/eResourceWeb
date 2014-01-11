@@ -18,16 +18,17 @@ namespace eResourceWeb.Controllers
         //
         // GET: /ResourceMaster/
 
-        public ActionResult Index(string searchString)
+    //    public ActionResult Index(string searchString)
+        public ActionResult Index()
         {
             db.Database.Log = Console.Write;
             var resources = from s in db.ResourceMaster 
                             select s;
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                resources = resources.Where(s => s.ResourceName.ToUpper().Contains(searchString.ToUpper()));
-            }
+       //     if (!String.IsNullOrEmpty(searchString))
+        //    {
+       //         resources = resources.Where(s => s.ResourceName.ToUpper().Contains(searchString.ToUpper()));
+       //     }
 
             resources = resources.OrderBy(s => s.ResourceName);
 
