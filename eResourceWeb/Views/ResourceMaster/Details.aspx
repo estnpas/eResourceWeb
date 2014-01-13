@@ -18,18 +18,6 @@
     <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/javascripts/src/jquery.treetable.js") %>"></script>
 
     <script type="text/javascript">
-        /**
-         *  deleteSkill
-         *  Remove the skill assignment for the resource and remove from the tree listing
-         *
-         *  @param resourceId
-         *  @param skillGroupId
-         *  @param skillId
-         */
-        function deleteSkill(resourceId, skillGroupId,  skillId) {
-            //alert("Delete " + resourceId + ":" + skillId);
-            $("#skillTable").treetable("removeNode",skillGroupId + "-" + skillId);
-        };
     </script>
 </head>
 <body>
@@ -75,7 +63,8 @@
                             <%: skill.SkillName %>
                         </td>
                         <td>
-                            <button id="button-<%: skill.SkillGroupId %>-<%: skill.SkillId %>" onclick="deleteSkill(<%: Model.ResourceId %>,<%: skill.SkillGroupId %>,<%: skill.SkillId %>);">Delete</button>
+                            <button id="button-<%: skill.SkillGroupId %>-<%: skill.SkillId %>" 
+                                            onclick="location.href='<%: Url.Action("Unassign", "ResourceMaster", new {resourceId=Model.ResourceId,Id=skill.SkillId}) %>'">Unassign</button>
                         </td>
                     </tr>
                 <% } %>
