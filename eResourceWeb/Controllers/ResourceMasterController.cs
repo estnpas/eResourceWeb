@@ -159,6 +159,26 @@ namespace eResourceWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        //
+        //  GET: /Resource//Master/Unassign
+        //[ValidateAntiForgeryToken]  Removed for the moment
+
+        [HttpGet, ActionName("Unassign")]
+        public ActionResult Unassign(int resourceId, int Id)
+        {
+            //  p0 = Id (the unique Resource-Master Attribute ID)
+            string unassignQuery = "DELETE "
+                                    + "FROM dbo.ResourceMasterAttributes "
+                                    + "WHERE Id = @p0";
+                                    
+            db.Database.ExecuteSqlCommand(unassignQuery, 
+                                                Id);
+ 
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { Id = resourceId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
