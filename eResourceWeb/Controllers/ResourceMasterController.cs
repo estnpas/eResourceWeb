@@ -8,9 +8,11 @@ using System.Web.Mvc;
 using eResourceWeb.Models;
 using eResourceWeb.DAL;
 using eResourceWeb.DTO;
+using eResourceWeb.Services;
 
 namespace eResourceWeb.Controllers
 {
+
     public class ResourceMasterController : Controller
     {
         private ResourceWebContext db = new ResourceWebContext();
@@ -18,17 +20,12 @@ namespace eResourceWeb.Controllers
         //
         // GET: /ResourceMaster/
 
-    //    public ActionResult Index(string searchString)
+
         public ActionResult Index()
         {
             db.Database.Log = Console.Write;
             var resources = from s in db.ResourceMaster 
                             select s;
-
-       //     if (!String.IsNullOrEmpty(searchString))
-        //    {
-       //         resources = resources.Where(s => s.ResourceName.ToUpper().Contains(searchString.ToUpper()));
-       //     }
 
             resources = resources.OrderBy(s => s.ResourceName);
 
@@ -66,17 +63,18 @@ namespace eResourceWeb.Controllers
             resourcemaster.skillsList = resourceSkills;
 
             //  We need to retrieve manager's name
-            string managerNameSQLQuery = "select "
+          /*  string managerNameSQLQuery = "select "
                                       + "Id AS Id, "
                                     + "Name AS Name, "
                                     + "ManagerType AS ManagerType "
                                 + "FROM dbo.ManagerMaster "
-                                + "WHERE Id = @p0 ";
+                                + "WHERE Id = @p0 ";*/
                                 //+ "AND ManagerType = 'Resource'";
 
-            var manager = db.Database.SqlQuery<ManagerMasterDTO>(managerNameSQLQuery, resourcemaster.ManagerId).Single();
-            resourcemaster.ManagerName = manager.Name;
+          //  var manager = db.Database.SqlQuery<ManagerMasterDTO>(managerNameSQLQuery, resourcemaster.ManagerId).Single();
+          //  resourcemaster.ManagerName = manager.Name;
 
+            //resourcemaster.MangerName = ManagerService.
 
             return View(resourcemaster);
         }
