@@ -17,6 +17,7 @@ namespace eResourceWeb.Controllers
     {
         private ResourceWebContext db = new ResourceWebContext();
 
+
         //
         // GET: /ResourceMaster/
 
@@ -38,6 +39,8 @@ namespace eResourceWeb.Controllers
         public ActionResult Details(int id = 0)
         {
             ResourceMaster resourcemaster = db.ResourceMaster.Find(id);
+            
+
             if (resourcemaster == null)
             {
                 return HttpNotFound();
@@ -63,19 +66,18 @@ namespace eResourceWeb.Controllers
             resourcemaster.skillsList = resourceSkills;
 
             //  We need to retrieve manager's name
-          /*  string managerNameSQLQuery = "select "
-                                      + "Id AS Id, "
-                                    + "Name AS Name, "
-                                    + "ManagerType AS ManagerType "
-                                + "FROM dbo.ManagerMaster "
-                                + "WHERE Id = @p0 ";*/
-                                //+ "AND ManagerType = 'Resource'";
-
-          //  var manager = db.Database.SqlQuery<ManagerMasterDTO>(managerNameSQLQuery, resourcemaster.ManagerId).Single();
-          //  resourcemaster.ManagerName = manager.Name;
-
-            //resourcemaster.MangerName = ManagerService.
-
+            ManagerService managerService = ManagerService.Instance;
+            ManagerMasterDTO mangerObject = managerService.GetManger(resourcemaster.ManagerId);
+            if (mangerObject != null)
+            {
+                resourcemaster.ManagerName = mangerObject.Name;
+            }
+            else
+            {
+                resourcemaster.ManagerName = "N/A";
+            }
+           
+             
             return View(resourcemaster);
         }
 
