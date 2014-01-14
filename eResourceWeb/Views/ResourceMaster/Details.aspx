@@ -5,8 +5,7 @@
 <html>
 <head runat="server">
     <meta name="viewport" content="width=device-width" />
-    <title>Resource Skill</title>
-    <h1>Resource Skill Assignment</h1>
+    <title>Details</title>
 
     <link href="<%= ResolveUrl ("~/Content/site.css") %>" rel="stylesheet" type="text/css" /> 
     <link href="<%= ResolveUrl ("~/Content/themes/smoothness/jquery-ui.css") %>" rel="stylesheet" type="text/css">    
@@ -19,77 +18,31 @@
     <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/javascripts/src/jquery.treetable.js") %>"></script>
 
     <script type="text/javascript">
-        $(function () {
-
-            $("#addskill-dialog-form").dialog({
-                autoOpen: false,
-                height: 300,
-                width: 350,
-                modal: true,
-                buttons: {
-                    "Assign": function () {
-                        var bValid = true;
-                        allFields.removeClass("ui-state-error");
-
-                        //  Add in some cool validation
-
-                        //  If valid, post....
-                        if (bValid) {
-
-                            //  Post me baby
-                            $(this).dialog("close");
-                        }
-                    },
-                    Cancel: function () {
-                        $(this).dialog("close");
-                    }
-                },
-                close: function () {
-                    allFields.val("").removeClass("ui-state-error");
-                }
-            });
-
-            $("#add-skill")
-                    .button()
-                        .click(function () {
-                            $("#addskill-dialog-form").dialog("open");
-                        });
-        });
     </script>
 </head>
 <body>
  
-    <!--  Dialog box for attaching a Skill to a Resource -->
-    <div id="addskill-dialog-form" title="Assign a Skill">
-          <form>
-              <fieldset>
-                <label for="skill">Skill</label>
-                <input type="text" name="skill" id="skill" class="text ui-widget-content ui-corner-all">
-              </fieldset>
-          </form>
-    </div>
 
-    <!--  Resource Header information -->
-    <div id="resourceHeaderDiv">
-        <table>
-            <tr>
-                <td class="display-label">
-                    <%: Html.DisplayNameFor(model => model.ResourceName) %>
-                </td> 
-                <td class="display-field">
-                     <%: Html.DisplayFor(model => model.ResourceName) %>      
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    <%: Html.DisplayNameFor(model => model.ManagerId) %>
-                </td> 
-                <td class="display-field">
-                     <%: Html.DisplayFor(model => model.ManagerName) %>    
-                </td>
-            </tr>
-        </table>
-    </div>
+<div>
+    <table>
+        <tr>
+            <td class="display-label">
+                <%: Html.DisplayNameFor(model => model.ResourceName) %>
+            </td> 
+            <td class="display-field">
+                 <%: Html.DisplayFor(model => model.ResourceName) %>      
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                <%: Html.DisplayNameFor(model => model.ManagerId) %>
+            </td> 
+            <td class="display-field">
+                 <%: Html.DisplayFor(model => model.ManagerName) %>    
+            </td>
+        </tr>
+    </table>
+</div>
     <div>
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="skillTable" align="left">
             <thead>
@@ -130,11 +83,9 @@
         </table>
     </div>
 
-    
-
     <table>
         <tr>
-            <td><button id="add-skill">Add Skill</button></td>
+            <td><%: Html.ActionLink("Edit", "Edit", new { id=Model.ResourceId }) %> |</td>
             <td><%: Html.ActionLink("Back to List", "Index") %></td>
         </tr>
     </table>
