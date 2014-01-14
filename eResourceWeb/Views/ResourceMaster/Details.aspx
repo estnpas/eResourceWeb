@@ -17,9 +17,14 @@
     <link href="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/stylesheets/jquery.treetable.theme.default.css") %>" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/ludo-jquery-treetable-609b82a/javascripts/src/jquery.treetable.js") %>"></script>
 
+    <link href="<%= ResolveUrl ("~/Scripts/select2-3.4.5/select2.css") %>" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/select2-3.4.5/select2.js") %>"></script>
+
     <script type="text/javascript">
 
         $(function () {
+
+            //  Create the dialog to enter the skill
             $("#addskill-dialog-form").dialog({
                 autoOpen: false,
                 height: 300,
@@ -48,7 +53,6 @@
                                     contentType: "application/json;charset=utf-8",
                                     data: JSON.stringify(assignResourceSkill)
                             });
-                            //$("#addskill-dialog-form").submit();
 
                             $(this).dialog("close");
                         }
@@ -62,11 +66,39 @@
                 }
             });
 
+            //  Open the dialog box when clicked
             $("#add-skill")
                     .button()
                         .click(function () {
                             $("#addskill-dialog-form").dialog("open");
                         });
+
+            //  Establish the drop-down list of the available skills
+            var skillList = [
+                      "ActionScript",
+                      "AppleScript",
+                      "Asp",
+                      "BASIC",
+                      "C",
+                      "C++",
+                      "Clojure",
+                      "COBOL",
+                      "ColdFusion",
+                      "Erlang",
+                      "Fortran",
+                      "Groovy",
+                      "Haskell",
+                      "Java",
+                      "JavaScript",
+                      "Lisp",
+                      "Perl",
+                      "PHP",
+                      "Python",
+                      "Ruby",
+                      "Scala",
+                      "Scheme"
+            ];
+            $("#skillName").select2(); 
         });
     </script>
 </head>
@@ -77,8 +109,10 @@
           <form id="assignskill-form" >
               <fieldset>
                 <label for="skillName">Skill</label>
-                <input type="text" name="skillName" id="skillName" class="text ui-widget-content ui-corner-all">
-                <input type="hidden" name="resourceId" id="resourceId" value="<%: Model.ResourceId %>" />
+                <select id="skillName" data-placeholder="Choose a Skill...." class="chosen-select" style="width:350px;" tabindex="1">
+                    <option>.net</option>
+                    <option>java</option>
+                </select>
               </fieldset>
           </form>
     </div>
