@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResourceMasterAttributesController.cs" />
     <Compile Include="Controllers\ResourceMasterController.cs" />
+    <Compile Include="Controllers\ResourceMasterSkillController.cs" />
     <Compile Include="DAL\ResourceWebContext.cs" />
     <Compile Include="DTO\BaseDTO.cs" />
     <Compile Include="DTO\ManagerMasterDTO.cs" />
