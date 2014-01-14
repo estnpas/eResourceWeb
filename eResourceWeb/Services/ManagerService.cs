@@ -16,7 +16,6 @@ namespace eResourceWeb.Services
         //Get the default MemoryCache to cache objects in memory
         private static ObjectCache cache = MemoryCache.Default;
         private CacheItemPolicy policy = null;
-        private CacheEntryRemovedCallback callback = null;
 
         //  We need to retrieve manager's name
         private static string managerNameSQLQuery = "select "
