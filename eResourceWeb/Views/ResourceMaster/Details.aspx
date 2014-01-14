@@ -28,14 +28,28 @@
                 buttons: {
                     "Assign": function () {
                         var bValid = true;
-                        allFields.removeClass("ui-state-error");
 
                         //  Add in some cool validation
 
                         //  If valid, post....
                         if (bValid) {
+                            alert("Post the form....");
+
+                            var assignResourceSkill = {
+                                ResourceId: <%: Model.ResourceId %>,
+                                SkillName: document.getElementById("skillName").value
+                            };
 
                             //  Post me baby
+                            $.ajax({url: '<%: Url.Action(
+                                                            "Assign",
+                                                            "ResourceMaster")%>',
+                                    type: "POST",
+                                    contentType: "application/json;charset=utf-8",
+                                    data: JSON.stringify(assignResourceSkill)
+                            });
+                            //$("#addskill-dialog-form").submit();
+
                             $(this).dialog("close");
                         }
                     },
@@ -44,7 +58,7 @@
                     }
                 },
                 close: function () {
-                    allFields.val("").removeClass("ui-state-error");
+                    
                 }
             });
 
@@ -60,10 +74,11 @@
  
     <!--  Dialog box for attaching a Skill to a Resource -->
     <div id="addskill-dialog-form" title="Assign a Skill">
-          <form>
+          <form id="assignskill-form" >
               <fieldset>
-                <label for="skill">Skill</label>
-                <input type="text" name="skill" id="skill" class="text ui-widget-content ui-corner-all">
+                <label for="skillName">Skill</label>
+                <input type="text" name="skillName" id="skillName" class="text ui-widget-content ui-corner-all">
+                <input type="hidden" name="resourceId" id="resourceId" value="<%: Model.ResourceId %>" />
               </fieldset>
           </form>
     </div>
@@ -122,6 +137,10 @@
                         <td class="center">
                             <%: skill.SkillName %>
                         </td>
+                        <td>
+                            <button id="button-<%: skill.SkillGroupId %>-<%: skill.SkillId %>" 
+                                            onclick="location.href='<%: Url.Action("Unassign", "ResourceMaster", new {resourceId=Model.ResourceId,Id=skill.SkillId}) %>'">Unassign</button>
+                        </td>
                     </tr>
                 <% } %>
             </tbody>
@@ -130,12 +149,12 @@
 
     <table>
         <tr>
-            <td><button id="add-skill">Add Skill</button></td>
+            <td><button id="add-skill">Assign Skill</button></td>
             <td><%: Html.ActionLink("Back to List", "Index") %></td>
         </tr>
     </table>
     
-    <script  language="javascript" type="text/javascript">   
+    <script language="javascript" type="text/javascript">   
         $("#skillTable").treetable({
                         expandable: true
         });
@@ -143,13 +162,6 @@
             $(".selected").not(this).removeClass("selected");
             $(this).toggleClass("selected");
         });
-
-        /*$("button").button({
-            icons: {
-                primary: "ui-icon-circle-close"
-            },
-            text: false
-        }); */
     </script>
 </body>
 </html>

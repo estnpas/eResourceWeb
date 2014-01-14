@@ -1,14 +1,14 @@
-﻿using System;
+﻿using eResourceWeb.DAL;
+using eResourceWeb.DTO;
+using eResourceWeb.Models;
+using eResourceWeb.Services;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eResourceWeb.Models;
-using eResourceWeb.DAL;
-using eResourceWeb.DTO;
-using eResourceWeb.Services;
 
 namespace eResourceWeb.Controllers
 {
@@ -162,20 +162,71 @@ namespace eResourceWeb.Controllers
         }
 
         //
-        //  GET: /Resource//Master/Unassign
+        //  POST: /ResourceMaster/Assign
+        //
+        [HttpPost, ActionName("Assign")]
+        public void Assign(AssignResourceSkill assignResourceSkill)
+        {
+            //  p0 = AssignResourceSkill.ResourceId
+            //  p1 = AssignResourceSkill.SkillName
+            
+            /*  AttributeID:        select TypeId from ResourceMaster where ResourceId = :resourceId
+             *  AttributeValudId
+             *          SELECT rtav.AttributeValueId FROM ResourceTypeAttributeValue rtav
+             *                      JOIN ResourceTypeAttribute rta
+             *                          ON rta.Id = rtav.attributeId
+             *                      JOIN ResourceMaster rm
+             *                          ON rm.typeId = rta.resourceTypeId
+             *              WHERE rtav.attributeValue = @p1
+             *                  AND rm.resourceId = @p0
+             */
+            string resourceIdSql = "@p0";
+            string attributeIdSql = "SELECT "
+								+ "TypeId "
+								+ "FROM dbo.ResourceMaster "
+								+ "WHERE ResourceId = @p0";
+            string attributeValueIdSql = "SELECT "
+                                + "rtav.AttributeValueId "
+                                + "FROM ResourceTypeAttributeValue rtav "
+                                + "JOIN ResourceTypeAttribute rta "
+                                + "ON rta.Id = rtav.attributeId "
+                                + "JOIN ResourceMaster rm "
+                                + "ON rm.typeId = rta.resourceTypeId "
+                                + "WHERE rtav.attributeValue = @p1 "
+                                + "AND rm.resourceId = @p0";
+
+            string assignSql = "INSERT INTO "
+                                    + "dbo.ResourceMasterAttributes "
+                                    + "("
+                                    + "ResourceId, "
+                                    + "AttributeId ,"
+                                    + "AttributeValueId"
+                                    + ") SELECT "
+                                    + "(" + resourceIdSql + "),"
+                                    + "(" + attributeIdSql + "),"
+                                    + "(" + attributeValueIdSql + ")";
+            db.Database.ExecuteSqlCommand(assignSql,
+                                            assignResourceSkill.ResourceId,
+                                            assignResourceSkill.SkillName);
+            db.SaveChanges();
+
+            //return RedirectToAction("Details", new { Id = assignResourceSkill.ResourceId });
+        }
+
+        //
+        //  GET: /ResourceMaster/Unassign
         //[ValidateAntiForgeryToken]  Removed for the moment
 
         [HttpGet, ActionName("Unassign")]
         public ActionResult Unassign(int resourceId, int Id)
         {
             //  p0 = Id (the unique Resource-Master Attribute ID)
-            string unassignQuery = "DELETE "
+            string unassignSql = "DELETE "
                                     + "FROM dbo.ResourceMasterAttributes "
                                     + "WHERE Id = @p0";
                                     
-            db.Database.ExecuteSqlCommand(unassignQuery, 
+            db.Database.ExecuteSqlCommand(unassignSql, 
                                                 Id);
- 
             db.SaveChanges();
 
             return RedirectToAction("Details", new { Id = resourceId });
@@ -185,6 +236,15 @@ namespace eResourceWeb.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        /**
+         * Define the local class for handling the parameters from the Assign Resource-Skill
+         */
+        public class AssignResourceSkill
+        {
+            public string ResourceId { get; set; }
+            public string SkillName { get; set; }
         }
     }
 }
